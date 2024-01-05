@@ -1,0 +1,12 @@
+horse_name,Jockey,win_general,place_general,runs,win,place,cuota
+Big Dream,Oisin James Orr,10,10,20,10,10,5.7
+Ibiza Rocks,Harry Russell,10,10,509,12,32,6.0
+Odd Socks Havana,P J Mcdonald,0,100,1555,13,38,6.2
+Braes Of Doune,Paul Mulrennan,10,10,20,10,10,6.4
+Marcello Si,Clifford Lee,0,43,1056,12,37,8.0
+Maraakiz,David Nolan,0,0,432,12,32,13.5
+Mekbat,Aiden Brookes,0,67,175,7,25,11.5
+Reclaim Victory,Ben Robinson,10,10,20,10,10,13.5
+Ubettabequick,Rowan Scott,0,33,474,8,29,60.0
+Mr Coco Bean,James Sullivan,100,100,1095,7,24,80.0
+Reflex,Cam Hardie,0,0,2144,6,25,140.0
