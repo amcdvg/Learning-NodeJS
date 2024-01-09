@@ -2,8 +2,16 @@ import express, { json } from 'express' // require -> commonJS
 import { randomUUID } from 'node:crypto'
 import cors from 'cors'
 // const { app } = require('./util/cors_')
-import movies, { filter, find, push, findIndex, splice } from './movies.json'
-import { validateMovie, validatePartialMovie } from './schemas/movies'
+// import movies from './movies.json' with { type: 'json'}
+import { validateMovie, validatePartialMovie } from './schemas/movies.js'
+
+// import fs from 'node:fs'
+// const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8'))
+
+// leer un json en ESModules recomendado hasta ahora
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+const movies = require('./movies.json')
 
 const app = express()
 app.use(json())
@@ -39,7 +47,7 @@ app.disable('x-powered-by') // deshabilitar el header X-Powered-By: Express
 app.get('/movies', (req, res) => {
   const { genre } = req.query
   if (genre) {
-    const filteredMovies = filter(
+    const filteredMovies = movies.filter(
       movie => movie.genre.some(g => g.toLowerCase() === genre.toLowerCase())
     )
     return res.json(filteredMovies)
@@ -49,7 +57,7 @@ app.get('/movies', (req, res) => {
 
 app.get('/movies/:id', (req, res) => {
   const { id } = req.params
-  const movie = find(movie => movie.id === id)
+  const movie = movies.find(movie => movie.id === id)
   if (movie) return res.json(movie)
   res.status(404).json({ message: 'Movie not found' })
 })
@@ -70,20 +78,20 @@ app.post('/movies', (req, res) => {
 
   // Esto no sería REST, porque estamos guardando
   // el estado de la aplicación en memoria
-  push(newMovie)
+  movies.push(newMovie)
 
   res.status(201).json(newMovie)
 })
 
 app.delete('/movies/:id', (req, res) => {
   const { id } = req.params
-  const movieIndex = findIndex(movie => movie.id === id)
+  const movieIndex = movies.findIndex(movie => movie.id === id)
 
   if (movieIndex === -1) {
     return res.status(404).json({ message: 'Movie not found' })
   }
 
-  splice(movieIndex, 1)
+  movies.splice(movieIndex, 1)
 
   return res.json({ message: 'Movie deleted' })
 })
@@ -96,7 +104,7 @@ app.patch('/movies/:id', (req, res) => {
   }
 
   const { id } = req.params
-  const movieIndex = findIndex(movie => movie.id === id)
+  const movieIndex = movies.findIndex(movie => movie.id === id)
 
   if (movieIndex === -1) {
     return res.status(404).json({ message: 'Movie not found' })
