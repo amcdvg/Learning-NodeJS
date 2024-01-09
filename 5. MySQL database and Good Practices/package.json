@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "start:mysql": "node --watch server-with-mysql.js",
+    "start:local": "node --watch server-with-local.js"
   },
   "repository": {
     "type": "git",
@@ -29,8 +31,10 @@
   },
   "dependencies": {
     "cors": "2.8.5",
+    "dotenv": "^16.3.1",
     "express": "4.18.2",
     "mongodb": "6.3.0",
+    "mysql2": "^3.7.0",
     "zod": "3.22.4"
   }
 }
